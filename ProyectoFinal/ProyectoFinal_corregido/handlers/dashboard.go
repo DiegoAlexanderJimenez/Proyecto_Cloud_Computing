@@ -11,6 +11,7 @@ import (
 type Instance struct {
     Hostname  string
     IP        string
+    HTTPPort  int
     CreatedAt time.Time
 }
 

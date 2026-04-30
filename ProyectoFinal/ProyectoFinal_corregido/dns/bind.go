@@ -14,42 +14,26 @@ const (
 
 // Agrega un registro A a la zona DNS e incrementa el serial
 func AddRecord(hostname, ip string) error {
-
-    fmt.Println("====================================")
-    fmt.Println("Iniciando AddRecord:", hostname, ip)
-
-    // 1. Agregar registro A
+    // 1. Agregar el registro A
     addRecord := fmt.Sprintf(
         "echo '%s IN A %s' | sudo tee -a %s",
         hostname, ip, ZoneFile,
     )
 
-    // 2. Incrementar serial
+    // 2. Incrementar el serial (reemplaza el número antes de "; serial")
     bumpSerial := fmt.Sprintf(
         `sudo sed -i 's/\([0-9]\+\)\(\s*;\s*serial\)/'"$(( $(grep -oP '[0-9]+(?=\s*;\s*serial)' %s) + 1 ))"'\2/' %s`,
         ZoneFile, ZoneFile,
     )
 
-    // 3. Recargar bind
+    // 3. Recargar Bind9
     reload := "sudo systemctl reload bind9"
 
-    cmds := []string{addRecord, bumpSerial, reload}
-
-    for _, cmd := range cmds {
-        fmt.Println("------------------------------------")
-        fmt.Println("Ejecutando en DNS:", cmd)
-
-        err := vbox.RunSSH(NSHost, cmd)
-
-        if err != nil {
-            fmt.Println("ERROR en comando DNS:", err)
-            return fmt.Errorf("DNS AddRecord fallo en comando '%s': %w", cmd, err)
+    for _, cmd := range []string{addRecord, bumpSerial, reload} {
+        if err := vbox.RunSSH(NSHost, cmd); err != nil {
+            return fmt.Errorf("DNS AddRecord: %w", err)
         }
-
-        fmt.Println("Comando ejecutado correctamente")
     }
-
-    fmt.Println("Registro DNS agregado correctamente")
     return nil
 }
 
