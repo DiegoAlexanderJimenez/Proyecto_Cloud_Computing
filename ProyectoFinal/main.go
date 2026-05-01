@@ -10,6 +10,7 @@ func main() {
     http.HandleFunc("/", handlers.Dashboard)
     http.HandleFunc("/provision", handlers.Provision)
     http.HandleFunc("/delete", handlers.Delete)
+    http.HandleFunc("/logs", handlers.Logs)
 
     log.Println("Servidor corriendo en http://localhost:8081")
     log.Fatal(http.ListenAndServe(":8081", nil))

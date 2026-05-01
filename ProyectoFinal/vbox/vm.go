@@ -36,15 +36,13 @@ func CreateVM(name, ip string, sshPort int) error {
 		//    NIC1 = NAT (para SSH inicial)
 		//    NIC2 = red interna cloudnet (para comunicación final)
 		{"VBoxManage", "modifyvm", name,
-			"--memory", "512", "--cpus", "1",
-			"--nic1", "nat",
-			"--nic2", "intnet", "--intnet2", "cloudnet"},
+		"--memory", "512", "--cpus", "1",
+		"--nic1", "nat",
+		"--nic2", "hostonly", "--hostonlyadapter2", "VirtualBox Host-Only Ethernet Adapter #2"},
 
 		// 5. Port forwarding: host:sshPort -> VM:22 y host:httpPort -> VM:80
 		{"VBoxManage", "modifyvm", name,
 			"--natpf1", fmt.Sprintf("ssh,tcp,,%d,,22", sshPort)},
-		{"VBoxManage", "modifyvm", name,
-			"--natpf1", fmt.Sprintf("http,tcp,,%d,,80", sshPort+1000)},
 
 		// 6. Arrancar headless
 		{"VBoxManage", "startvm", name, "--type", "headless"},
