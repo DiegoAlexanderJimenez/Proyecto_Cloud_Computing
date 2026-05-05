@@ -112,3 +112,21 @@ func WaitForSSHPort(host string, port int, maxAttempts int) error {
 	}
 	return fmt.Errorf("SSH no disponible en %s:%d tras %d intentos", host, port, maxAttempts)
 }
+
+func RunSSHOutput(host, cmd string) (string, error) {
+	client, err := sshClient(host, 22)
+	if err != nil {
+		return "", fmt.Errorf("conexión SSH a %s fallida: %w", host, err)
+	}
+	defer client.Close()
+
+	session, err := client.NewSession()
+	if err != nil {
+		return "", err
+	}
+	defer session.Close()
+
+	wrappedCmd := fmt.Sprintf("echo '%s' | sudo -S bash -c %q", SSHPass, cmd)
+	out, err := session.CombinedOutput(wrappedCmd)
+	return string(out), err
+}

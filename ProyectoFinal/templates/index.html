@@ -16,14 +16,14 @@
       font-family: 'Inter', 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #0f172a, #1e293b);
       color: #e2e8f0;
-      max-width: 1000px;
-      margin: 60px auto;
+      max-width: 1400px;
+      margin: 40px auto;
       padding: 20px;
     }
 
     h1 {
       font-size: 2rem;
-      margin-bottom: 25px;
+      margin-bottom: 10px;
       font-weight: 700;
       text-align: center;
       background: linear-gradient(90deg, #38bdf8, #6366f1);
@@ -37,12 +37,76 @@
       font-weight: 600;
     }
 
+    /* BANNER NS */
+    .ns-banner {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(56, 189, 248, 0.15));
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 14px;
+      padding: 16px 24px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .ns-banner-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .ns-banner-text strong {
+      font-size: 1rem;
+      color: #38bdf8;
+    }
+
+    .ns-banner-text span {
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+
+    .ns-banner-badge {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #f87171;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* LAYOUT 2 COLUMNAS */
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 500px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* COLUMNA IZQUIERDA */
+    .col-left {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* COLUMNA DERECHA */
+    .col-right {
+      position: sticky;
+      top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
     form {
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(12px);
       border-radius: 16px;
       padding: 25px;
-      margin-bottom: 35px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
       transition: 0.3s;
@@ -206,15 +270,30 @@
       box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
     }
 
-    /* 🔥 NUEVA SECCIÓN LOGS PRO */
+    .btn-edit {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    }
+
+    .btn-edit:hover {
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-save {
+      background: linear-gradient(135deg, #22c55e, #4ade80);
+    }
+
+    .btn-save:hover {
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
+    }
+
+    /* LOGS */
     #logs-container {
-      margin-top: 40px;
       background: rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(10px);
       border-radius: 16px;
       padding: 20px;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
       position: relative;
       overflow: hidden;
     }
@@ -235,14 +314,14 @@
       background: #020617;
       color: #22c55e;
       font-family: monospace;
-      height: 320px;
+      height: 280px;
       overflow-y: auto;
       padding: 14px;
       border-radius: 12px;
-      border: 1px solid rgba(56,189,248,0.2);
+      border: 1px solid rgba(56, 189, 248, 0.2);
       font-size: 0.8rem;
       line-height: 1.6;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
       position: relative;
     }
 
@@ -262,27 +341,90 @@
     }
 
     #logs div:hover {
-      background: rgba(56,189,248,0.08);
+      background: rgba(56, 189, 248, 0.08);
       border-left: 2px solid #38bdf8;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    #logs::after {
-      content: "_";
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      color: #22c55e;
-      animation: blink 1s infinite;
+    /* ZONA DNS */
+    #zone-container {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    #zone-container h2 {
+      font-size: 0.95rem;
+      color: #38bdf8;
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    #zone {
+      background: #020617;
+      color: #38bdf8;
+      font-family: monospace;
+      height: 520px;
+      overflow-y: auto;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      font-size: 0.8rem;
+      line-height: 1.8;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+      white-space: pre;
+    }
+
+    #zone::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #zone::-webkit-scrollbar-thumb {
+      background: linear-gradient(#38bdf8, #6366f1);
+      border-radius: 10px;
+    }
+
+    .zone-label {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .zone-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: blink 1.5s infinite;
     }
 
     @keyframes blink {
-      0%, 50%, 100% { opacity: 1; }
-      25%, 75% { opacity: 0; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.2;
+      }
     }
   </style>
 </head>
@@ -291,54 +433,97 @@
 
   <h1>Gestión de páginas y aplicaciones web</h1>
 
-  <form id="provision-form">
-    <label>Nombre del host</label>
-    <input type="text" name="hostname" id="hostname" placeholder="Ingrese el nombre del host" required>
-
-    <label>Contenido web (.zip)</label>
-    <div class="file-input">
-      <input type="file" name="zipfile" id="file" accept=".zip" required>
-      <label for="file" class="file-label">Seleccionar archivo</label>
-      <span id="file-name">Ningún archivo seleccionado</span>
+  <!-- BANNER NS -->
+  <div class="ns-banner">
+    <div class="ns-banner-text">
+      <strong>Paso 1 — Iniciar servidor DNS</strong>
+      <span>Antes de crear cualquier instancia, asegúrate de que la VM <code>ns</code> esté encendida.</span>
     </div>
-
-    <button type="submit" id="btn-publicar">Publicar</button>
-  </form>
-
-  <div id="tabla-container">
-    {{if .Instances}}
-    <h2>Instancias disponibles</h2>
-    <table>
-      <tr>
-        <th>URL</th>
-        <th>IP</th>
-        <th>Hostname</th>
-        <th>Creada</th>
-        <th>Acciones</th>
-      </tr>
-
-      {{range .Instances}}
-      <tr>
-        <td>
-          <a href="http://{{.IP}}" target="_blank">
-            http://{{.Hostname}}.cloud.local</a>
-        </td>
-        <td>{{.IP}}</td>
-        <td>{{.Hostname}}</td>
-        <td>{{.CreatedAt.Format "2006-01-02 15:04:05"}}</td>
-        <td>
-          <button class="btn-delete" onclick="eliminar('{{.Hostname}}')">Eliminar</button>
-        </td>
-      </tr>
-      {{end}}
-
-    </table>
-    {{end}}
+    <div style="display:flex; align-items:center; gap:12px;">
+      <span class="ns-banner-badge">REQUERIDO PRIMERO</span>
+      <button onclick="iniciarNS()">▶ Iniciar VM ns</button>
+    </div>
   </div>
 
-  <div id="logs-container">
-    <h2>Logs en tiempo real</h2>
-    <div id="logs"></div>
+  <!-- LAYOUT 2 COLUMNAS -->
+  <div class="layout">
+
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="col-left">
+
+      <form id="provision-form">
+        <h2 style="margin-top:0; margin-bottom:18px;">Nueva instancia</h2>
+        <label>Nombre del host</label>
+        <input type="text" name="hostname" id="hostname" placeholder="Ingrese el nombre del host" required>
+
+        <label>Contenido web (.zip)</label>
+        <div class="file-input">
+          <input type="file" name="zipfile" id="file" accept=".zip" required>
+          <label for="file" class="file-label">Seleccionar archivo</label>
+          <span id="file-name">Ningún archivo seleccionado</span>
+        </div>
+
+        <button type="submit" id="btn-publicar">Publicar</button>
+      </form>
+
+      <div id="tabla-container">
+        {{if .Instances}}
+        <h2>Instancias disponibles</h2>
+        <table>
+          <tr>
+            <th>URL</th>
+            <th>IP</th>
+            <th>Hostname</th>
+            <th>Creada</th>
+            <th>Acciones</th>
+          </tr>
+
+          {{range .Instances}}
+          <tr>
+            <td>
+              <a href="http://{{.IP}}" target="_blank">
+                http://{{.Hostname}}.cloud.local
+              </a>
+            </td>
+            <td>{{.IP}}</td>
+
+            <td id="hostname-{{.Hostname}}">
+              {{.Hostname}}
+            </td>
+
+            <td>{{.CreatedAt.Format "2006-01-02 15:04:05"}}</td>
+
+            <td style="display:flex; gap:8px;">
+              <button class="btn-edit" onclick="editar('{{.Hostname}}')">Editar</button>
+              <button class="btn-save" style="display:none;" onclick="guardar('{{.Hostname}}')">Guardar</button>
+              <button class="btn-delete" onclick="eliminar('{{.Hostname}}')">Eliminar</button>
+            </td>
+          </tr>
+          {{end}}
+
+        </table>
+        {{end}}
+      </div>
+
+      <div id="logs-container">
+        <h2>Logs en tiempo real</h2>
+        <div id="logs"></div>
+      </div>
+
+    </div>
+
+    <!-- COLUMNA DERECHA -->
+    <div class="col-right">
+      <div id="zone-container">
+        <div class="zone-label">
+          <span class="zone-dot"></span>
+          Actualizando cada 5 segundos
+        </div>
+        <h2>Zona DNS — db.cloud.local</h2>
+        <div id="zone">Cargando...</div>
+      </div>
+    </div>
+
   </div>
 
   <script>
@@ -354,6 +539,46 @@
         fileName.classList.remove("active");
       }
     });
+
+    function iniciarNS() {
+      fetch("/startns", { method: "POST" });
+    }
+
+    function editar(hostname) {
+      const cell = document.getElementById("hostname-" + hostname);
+      const current = cell.textContent.trim();
+
+      cell.innerHTML = `<input id="input-${hostname}" type="text" value="${current}" 
+    style="width:100%; padding:5px; border-radius:6px;
+    background:rgba(255,255,255,0.1); border:1px solid #38bdf8; color:white;">`;
+
+      const row = cell.parentElement;
+      const buttons = row.querySelectorAll("button");
+
+      buttons[0].style.display = "none"; // editar
+      buttons[1].style.display = "inline"; // guardar
+    }
+
+    function guardar(oldHostname) {
+      const input = document.getElementById("input-" + oldHostname);
+      const newHostname = input.value.trim();
+
+      if (!newHostname || newHostname === oldHostname) {
+        actualizarTabla();
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("old_hostname", oldHostname);
+      formData.append("new_hostname", newHostname);
+
+      fetch("/rename", {
+        method: "POST",
+        body: formData
+      }).then(() => {
+        actualizarTabla();
+      });
+    }
 
     function actualizarTabla() {
       fetch("/")
@@ -418,6 +643,16 @@
       logsDiv.appendChild(line);
       logsDiv.scrollTop = logsDiv.scrollHeight;
     };
+
+    function actualizarZona() {
+      fetch("/zone")
+        .then(res => res.text())
+        .then(text => {
+          document.getElementById("zone").innerText = text;
+        });
+    }
+    actualizarZona();
+    setInterval(actualizarZona, 5000);
   </script>
 
 </body>
