@@ -71,6 +71,7 @@ func Rename(w http.ResponseWriter, r *http.Request) {
 	delete(store, oldHostname)
 	store[newHostname] = Instance{
 		Hostname:  newHostname,
+		VMName:    inst.VMName,
 		IP:        inst.IP,
 		CreatedAt: time.Now(),
 	}

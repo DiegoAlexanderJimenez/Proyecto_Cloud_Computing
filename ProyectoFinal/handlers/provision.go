@@ -146,6 +146,7 @@ func Provision(w http.ResponseWriter, r *http.Request) {
 	storeMu.Lock()
 	store[hostname] = Instance{
 		Hostname:  hostname,
+		VMName:    hostname,
 		IP:        ip,
 		CreatedAt: time.Now(),
 	}
@@ -168,7 +169,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 
 	if ok {
 		dns.RemoveRecord(hostname)
-		vbox.DeleteVM(inst.Hostname)
+		vbox.DeleteVM(inst.VMName)
 		logAndBroadcast("[Delete] Eliminado OK: %s", hostname)
 	}
 

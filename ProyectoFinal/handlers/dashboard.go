@@ -10,6 +10,7 @@ import (
 // Instance representa una VM aprovisionada
 type Instance struct {
     Hostname  string
+    VMName    string
     IP        string
     CreatedAt time.Time
 }

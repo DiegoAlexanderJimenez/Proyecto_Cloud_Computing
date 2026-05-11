@@ -11,8 +11,13 @@ const (
 	NSHost   = "192.168.10.10"
 	ZoneFile = "/etc/bind/db.cloud.local"
 )
-
 func AddRecord(hostname, ip string) error {
+	// Eliminar si ya existe para evitar duplicados
+	cleanExisting := fmt.Sprintf(
+		"sudo sed -i '/^%s IN A/d' %s && sudo sed -i '/^www.%s IN CNAME/d' %s",
+		hostname, ZoneFile, hostname, ZoneFile,
+	)
+
 	addRecord := fmt.Sprintf(
 		"echo '%s IN A %s' | sudo tee -a %s",
 		hostname, ip, ZoneFile,
@@ -27,7 +32,7 @@ func AddRecord(hostname, ip string) error {
 
 	reload := "sudo systemctl reload bind9"
 
-	for _, cmd := range []string{addRecord, addCNAME, bumpSerial, reload} {
+	for _, cmd := range []string{cleanExisting, addRecord, addCNAME, bumpSerial, reload} {
 		if err := vbox.RunSSH(NSHost, cmd); err != nil {
 			return fmt.Errorf("DNS AddRecord: %w", err)
 		}
